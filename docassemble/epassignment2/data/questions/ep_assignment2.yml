@@ -1,0 +1,66 @@
+---
+modules:
+  - docassemble.base.core
+  - docassemble.base.util
+---
+objects:
+  - user: Individual
+  - roommate: DAList.using(object_type=Individual, ask_number=True)
+---
+question:  |
+  What is your name?
+fields: 
+  - First Name: user.name.first
+  - Last Name: user.name.last
+mandatory: true
+---
+question:  |
+  Hello, ${ user.name.first } ${ user.name.last }. 
+  
+  Do you live with anyone else?
+yesno: roommate.there_is_another
+mandatory: true
+---
+question: How many people do you live with? 
+fields:
+  - number: roommate.target_number
+    datatype: integer
+mandatory: true
+---  
+question: Information about the ${ ordinal(i) } roommate.
+fields:
+  - First Name: roommate[i].name.first
+  - Last Name: roommate[i].name.last
+---
+question:  |
+  You have ${ roommate.number_as_word() } roommates in all.
+  Your roommates are ${ roommate }.
+---
+question: Do you like your living situation?
+field: target_variable
+choices:
+  - I wish my living situation were different.
+  - I wish I lived with more cats.
+  - "I couldn't be happier with my living situation"
+  - I wish I lived with fewer cats.
+Mandatory: true
+---
+question: What is your favourite animal?
+fields:
+  - Cat: likes_cats
+    datatype: yesnowide
+  - Turtle: likes_turtles
+    datatype: yesnowide
+  - Dog: likes_dogs
+    datatype: yesnowide
+  - Parrot: likes_parrotslikes_turtles
+    datatype: yesnowide
+Mandatory: true
+---
+question: Thanks, ${ user.name.first }!
+subquestion:  |
+  You told me you live with ${ roommate }
+buttons:
+  - Exit: exit
+mandatory: true
+---
