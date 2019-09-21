@@ -12,21 +12,18 @@ question:  |
 fields: 
   - First Name: user.name.first
   - Last Name: user.name.last
-mandatory: true
 ---
 question:  |
   Hello, ${ user.name.first } ${ user.name.last }. 
   
   Do you live with anyone else?
 yesno: roommate.there_is_another
-mandatory: true
 ---
 question: How many people do you live with? 
 fields:
   - number: roommate.target_number
     datatype: number
     min: 0
-mandatory: true
 ---  
 question: Information about the ${ ordinal(i) } roommate.
 fields:
@@ -38,13 +35,12 @@ question:  |
   Your roommates are ${ roommate }.
 ---
 question: Do you like your living situation?
-field: target_variable
+field: living_situation
 choices:
   - I wish my living situation were different.
   - I wish I lived with more cats.
   - "I couldn't be happier with my living situation"
   - I wish I lived with fewer cats.
-Mandatory: true
 ---
 question: What is your favourite animal?
 fields:
@@ -54,9 +50,9 @@ fields:
     datatype: yesnowide
   - Dog: likes_dogs
     datatype: yesnowide
-  - Parrot: likes_parrotslikes_turtles
+  - Parrot: likes_parrots
     datatype: yesnowide
-Mandatory: true
+mandatory: true
 ---
 question:  |
   Please sign your name.
@@ -65,11 +61,10 @@ Subquestion:  |
 signature: target_variable
 under:  |
   ${ user }
-mandatory: true
 ---
 question: Thanks, ${ user.name.first }!
 subquestion:  |
-  You told me you live with ${ roommate }
+  You told me you live with ${ roommate }, and you said "${ living_situation }."
 buttons:
   - Exit: exit
 mandatory: true
