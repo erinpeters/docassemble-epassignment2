@@ -24,7 +24,8 @@ mandatory: true
 question: How many people do you live with? 
 fields:
   - number: roommate.target_number
-    datatype: integer
+    datatype: number
+    min: 0
 mandatory: true
 ---  
 question: Information about the ${ ordinal(i) } roommate.
@@ -56,6 +57,15 @@ fields:
   - Parrot: likes_parrotslikes_turtles
     datatype: yesnowide
 Mandatory: true
+---
+question:  |
+  Please sign your name.
+Subquestion:  |
+  By signing your name, you agree to our terms and conditions
+signature: target_variable
+under:  |
+  ${ user }
+mandatory: true
 ---
 question: Thanks, ${ user.name.first }!
 subquestion:  |
